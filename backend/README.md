@@ -5,12 +5,12 @@ EchoTrace uses a GenLayer intelligent contract as the authoritative backend.
 ## Contract
 
 - `contracts/echotrace.py`
-- Network target: `testnet-asimov`
-- Contract address: `0x169a52D470f92B925f062c39A17Ea5be81b3cbdA`
+- Network target: `testnet-bradbury`
+- Contract address: `0xB6016107Bf89382AB7B2B65B9AB0b4624478c5d8`
 - Deploy/test key env var: `GENLAYER_PRIVATE_KEY_0`
 
 The frontend never reads `GENLAYER_PRIVATE_KEY_0`. End users connect their own
-wallet and sign transactions in the browser on GenLayer Asimov.
+wallet and sign transactions in the browser on GenLayer Bradbury.
 
 ## Main Methods
 
@@ -39,10 +39,10 @@ It does not support private data, doxxing, bots, spam, or trend manipulation.
 
 ```powershell
 & "C:\Program Files\nodejs\npm.cmd" run genlayer:lint
-& "C:\Program Files\nodejs\npm.cmd" run deploy:asimov
+& "C:\Program Files\nodejs\npm.cmd" run deploy:bradbury
 & "C:\Program Files\nodejs\npm.cmd" run genlayer:smoke
 ```
 
 The deploy script loads `.env`, imports `GENLAYER_PRIVATE_KEY_0` into the local
-GenLayer keystore, selects `testnet-asimov`, and deploys the contract for
+GenLayer keystore, selects `testnet-bradbury`, and deploys the contract for
 deployment/testing only.

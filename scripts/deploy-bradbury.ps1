@@ -1,5 +1,5 @@
 param(
-    [string]$AccountName = "echotrace-asimov",
+    [string]$AccountName = "echotrace-bradbury",
     [string]$ContractPath = ".\contracts\echotrace.py"
 )
 
@@ -42,7 +42,7 @@ function Resolve-GenLayerCli {
         }
     }
 
-    throw "GenLayer CLI not found. Install it with npm, then rerun npm run deploy:asimov."
+    throw "GenLayer CLI not found. Install it with npm, then rerun npm run deploy:bradbury."
 }
 
 $projectRoot = Resolve-Path (Join-Path $PSScriptRoot "..")
@@ -61,13 +61,13 @@ if ([string]::IsNullOrWhiteSpace($password)) {
 
 New-Item -ItemType Directory -Path ".\deployments" -Force | Out-Null
 
-Write-Host "Setting GenLayer network: testnet-asimov"
-& $GenLayer network set testnet-asimov
+Write-Host "Setting GenLayer network: testnet-bradbury"
+& $GenLayer network set testnet-bradbury
 
 Write-Host "Importing deploy account into local GenLayer keystore"
 & $GenLayer account import --name $AccountName --private-key $env:GENLAYER_PRIVATE_KEY_0 --password $password --overwrite
 
-Write-Host "Deploying EchoTrace contract to Asimov"
-$password | & $GenLayer deploy --contract $ContractPath | Tee-Object -FilePath ".\deployments\asimov-latest.txt"
+Write-Host "Deploying EchoTrace contract to Bradbury"
+$password | & $GenLayer deploy --contract $ContractPath | Tee-Object -FilePath ".\deployments\bradbury-latest.txt"
 
-Write-Host "Deployment output saved to deployments\asimov-latest.txt"
+Write-Host "Deployment output saved to deployments\bradbury-latest.txt"

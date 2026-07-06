@@ -1,6 +1,6 @@
 import type { AnalysisResult } from "../types/analysis";
 import { createClient } from "genlayer-js";
-import { testnetAsimov } from "genlayer-js/chains";
+import { testnetBradbury } from "genlayer-js/chains";
 import {
   ExecutionResult,
   TransactionHashVariant,
@@ -55,18 +55,17 @@ export type AnalyzeOptions = {
   onProgress?: (progress: GenLayerProgress, txHash?: string) => void;
 };
 
-export const GENLAYER_ASIMOV_EXPLORER =
-  "https://explorer-asimov.genlayer.com";
+export const GENLAYER_EXPLORER = "https://explorer-bradbury.genlayer.com";
 
 export const ECHOTRACE_CONTRACT_ADDRESS = (
   import.meta.env.VITE_ECHOTRACE_CONTRACT_ADDRESS ||
-  "0x169a52D470f92B925f062c39A17Ea5be81b3cbdA"
+  "0xB6016107Bf89382AB7B2B65B9AB0b4624478c5d8"
 ) as `0x${string}`;
 
 const ZERO_ADDRESS = "0x0000000000000000000000000000000000000000";
 
 const readClient = createClient({
-  chain: testnetAsimov,
+  chain: testnetBradbury,
 });
 
 export function hasContractAddress() {
@@ -87,7 +86,7 @@ export async function connectWallet(): Promise<`0x${string}`> {
     throw new Error("No connected account was found.");
   }
 
-  await ensureAsimovNetwork();
+  await ensureBradburyNetwork();
   return account as `0x${string}`;
 }
 
@@ -105,10 +104,10 @@ export async function analyzeWithGenLayer(
   }
 
   options.onProgress?.("switching-network");
-  await ensureAsimovNetwork();
+  await ensureBradburyNetwork();
 
   const writeClient = createClient({
-    chain: testnetAsimov,
+    chain: testnetBradbury,
     account: options.walletAddress,
     provider,
   });
@@ -151,11 +150,11 @@ export async function analyzeWithGenLayer(
   return trace.result;
 }
 
-async function ensureAsimovNetwork() {
+async function ensureBradburyNetwork() {
   const provider = window.ethereum;
   if (!provider) return;
 
-  const chainId = `0x${testnetAsimov.id.toString(16)}`;
+  const chainId = `0x${testnetBradbury.id.toString(16)}`;
   const currentChainId = await provider.request<string>({
     method: "eth_chainId",
   });
@@ -166,10 +165,10 @@ async function ensureAsimovNetwork() {
 
   const chainParams = {
     chainId,
-    chainName: testnetAsimov.name,
-    rpcUrls: [...testnetAsimov.rpcUrls.default.http],
-    nativeCurrency: testnetAsimov.nativeCurrency,
-    blockExplorerUrls: [testnetAsimov.blockExplorers?.default.url].filter(Boolean),
+    chainName: testnetBradbury.name,
+    rpcUrls: [...testnetBradbury.rpcUrls.default.http],
+    nativeCurrency: testnetBradbury.nativeCurrency,
+    blockExplorerUrls: [testnetBradbury.blockExplorers?.default.url].filter(Boolean),
   };
 
   try {

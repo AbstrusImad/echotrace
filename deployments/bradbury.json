@@ -1,0 +1,9 @@
+{
+  "network": "testnet-bradbury",
+  "contractName": "EchoTrace",
+  "contractAddress": "0xB6016107Bf89382AB7B2B65B9AB0b4624478c5d8",
+  "deploymentTx": "0xa35c355c00aa729423d2db760d511f3775c134dabe5ffe60dad0ef8836a7ec24",
+  "status": "ACCEPTED",
+  "result": "AGREE",
+  "executionResult": "FINISHED_WITH_RETURN"
+}

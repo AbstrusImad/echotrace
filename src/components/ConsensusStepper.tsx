@@ -14,7 +14,7 @@ type ConsensusStepperProps = {
 };
 
 const STEPS: { id: Stage; title: string; detail: string }[] = [
-  { id: "switching-network", title: "Align network", detail: "Wallet on GenLayer Asimov" },
+  { id: "switching-network", title: "Align network", detail: "Wallet on GenLayer Bradbury" },
   { id: "awaiting-signature", title: "Sign request", detail: "Authorize the trace" },
   { id: "waiting-consensus", title: "Validator consensus", detail: "Nodes re-run the assessment" },
   { id: "reading-result", title: "Seal verdict", detail: "Reading result from chain" },

@@ -6,6 +6,6 @@ _*.mjs
 _*.out
 deployments/
 !deployments/
-!deployments/asimov.json
+!deployments/bradbury.json
 deployments/*-latest.txt
 package-lock.json

@@ -34,5 +34,5 @@ $GenLayer = Resolve-GenLayerCli
 
 $signals = '[{"sourceType":"social","note":"Repeated launch phrase appeared across several public posts","observedAt":"T+18m","intensity":82},{"sourceType":"forum","note":"Multiple accounts repeated a similar claim within a short window","observedAt":"T+24m","intensity":74},{"sourceType":"community","note":"Only a small number of original explanations were observed","observedAt":"T+35m","intensity":61}]'
 
-& $GenLayer network set testnet-asimov
+& $GenLayer network set testnet-bradbury
 $password | & $GenLayer write $ContractAddress submit_trace --args "AI agents on-chain" $signals

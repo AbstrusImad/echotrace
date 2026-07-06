@@ -10,7 +10,7 @@ import {
   analyzeWithGenLayer,
   connectWallet,
   ECHOTRACE_CONTRACT_ADDRESS,
-  GENLAYER_ASIMOV_EXPLORER,
+  GENLAYER_EXPLORER,
   hasContractAddress,
 } from "./lib/genlayerClient";
 import type { AnalysisPhase, AnalysisResult, AnalysisVerdict } from "./types/analysis";
@@ -155,7 +155,7 @@ export default function App() {
         <div className="top-status">
           <span className="net-badge">
             <i className="net-dot" />
-            GenLayer Asimov
+            GenLayer Bradbury
           </span>
           <button
             type="button"
@@ -189,7 +189,7 @@ export default function App() {
                 walletError={
                   walletError ||
                   (!hasContractAddress()
-                    ? "Configure VITE_ECHOTRACE_CONTRACT_ADDRESS for Asimov."
+                    ? "Configure VITE_ECHOTRACE_CONTRACT_ADDRESS for Bradbury."
                     : "")
                 }
                 onConnectWallet={handleConnectWallet}
@@ -225,14 +225,14 @@ export default function App() {
                     <AnalysisResultCard
                       result={result}
                       txHash={txHash}
-                      explorerBase={GENLAYER_ASIMOV_EXPLORER}
+                      explorerBase={GENLAYER_EXPLORER}
                       onReset={resetTrace}
                     />
                   ) : (
                     <ConsensusStepper
                       stage={stage}
                       txHash={txHash}
-                      explorerBase={GENLAYER_ASIMOV_EXPLORER}
+                      explorerBase={GENLAYER_EXPLORER}
                     />
                   )}
                 </div>
@@ -269,12 +269,12 @@ export default function App() {
           and are not absolute proof.
         </p>
         <a
-          href={`${GENLAYER_ASIMOV_EXPLORER}/address/${ECHOTRACE_CONTRACT_ADDRESS}`}
+          href={`${GENLAYER_EXPLORER}/address/${ECHOTRACE_CONTRACT_ADDRESS}`}
           target="_blank"
           rel="noreferrer"
           className="footer-contract"
         >
-          Contract {shortAddress(ECHOTRACE_CONTRACT_ADDRESS)} · GenLayer Asimov
+          Contract {shortAddress(ECHOTRACE_CONTRACT_ADDRESS)} · GenLayer Bradbury
         </a>
       </footer>
     </div>

@@ -7,7 +7,7 @@ import json
 # Boundary:
 # - Frontend/backend owns UI, optional public-signal collection, caching and
 #   non-authoritative previews.
-# - This contract owns the authoritative Asimov state transition: given a
+# - This contract owns the authoritative Bradbury state transition: given a
 #   bounded query and bounded public aggregate signals, validators independently
 #   assess whether the propagation pattern appears Organic, Artificial Hype,
 #   Coordinated, or Unclear.
@@ -636,7 +636,7 @@ Return ONLY this JSON shape:
             {
                 "traces": int(self.trace_counter),
                 "analyzed": int(self.analyzed_counter),
-                "network": "testnet-asimov",
+                "network": "testnet-bradbury",
                 "engine": "EchoTrace GenLayer Signal Engine",
             }
         )

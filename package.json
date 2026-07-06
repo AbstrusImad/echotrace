@@ -8,7 +8,7 @@
     "build": "tsc --noEmit && vite build",
     "preview": "vite preview --host 127.0.0.1",
     "genlayer:lint": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/lint-contract.ps1",
-    "deploy:asimov": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/deploy-asimov.ps1",
+    "deploy:bradbury": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/deploy-bradbury.ps1",
     "genlayer:smoke": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/smoke-submit.ps1"
   },
   "dependencies": {

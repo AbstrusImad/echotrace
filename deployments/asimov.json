@@ -1,9 +1,0 @@
-{
-  "network": "testnet-asimov",
-  "contractName": "EchoTrace",
-  "contractAddress": "0x169a52D470f92B925f062c39A17Ea5be81b3cbdA",
-  "deploymentTx": "0x0330eb4a482532eed789f121e11f094a486e7206bf6272c6ea47b2e5483ca8ca",
-  "status": "ACCEPTED",
-  "result": "AGREE",
-  "executionResult": "FINISHED_WITH_RETURN"
-}

@@ -8,8 +8,8 @@ Is a trend growing on its own, or is someone manufacturing it? EchoTrace asks a
 network of AI validators, not a single server, and settles the verdict on chain.
 
 [Live app](https://echotrace-8ne.pages.dev/) ·
-[Contract on explorer](https://explorer-asimov.genlayer.com/address/0x169a52D470f92B925f062c39A17Ea5be81b3cbdA) ·
-[GenLayer Asimov Testnet](https://docs.genlayer.com)
+[Contract on explorer](https://explorer-bradbury.genlayer.com/address/0xB6016107Bf89382AB7B2B65B9AB0b4624478c5d8) ·
+[GenLayer Bradbury Testnet](https://docs.genlayer.com)
 
 </div>
 
@@ -74,7 +74,7 @@ That means the verdict is:
    Frontend derives bounded public aggregate signals
             |
             v
-   submit_and_analyze(query, signals)   <-- wallet-signed tx on Asimov
+   submit_and_analyze(query, signals)   <-- wallet-signed tx on Bradbury
             |
             v
    Leader LLM produces a structured assessment
@@ -148,11 +148,11 @@ Inputs are untrusted data, never instructions. The contract:
 +-------------------+        wallet-signed tx        +----------------------------+
 |   React frontend  |  ----------------------------> |  EchoTrace intelligent     |
 |  (Vite + TS)      |                                |  contract (Python)         |
-|                   |  <---------------------------- |  on GenLayer Asimov        |
+|                   |  <---------------------------- |  on GenLayer Bradbury      |
 |  reads verdicts   |         read views             |                            |
 +-------------------+                                +----------------------------+
         |                                                        |
-        |  MetaMask (GenLayer Asimov, chain 61999)               |  LLM under
+        |  MetaMask (GenLayer Bradbury, chain 4221)              |  LLM under
         v                                                        v  validator consensus
    User's browser                                          Deterministic backstops
 ```
@@ -215,7 +215,7 @@ type AnalysisResult = {
 - **Frontend**: React 19, TypeScript, Vite 7
 - **Animation**: Framer Motion, plus a custom `<canvas>` signal-network field
 - **Chain access**: `genlayer-js`
-- **Wallet**: MetaMask-compatible, GenLayer Asimov (chain id 61999)
+- **Wallet**: MetaMask-compatible, GenLayer Bradbury (chain id 4221)
 - **Hosting**: Cloudflare Pages
 
 ## Local development
@@ -233,7 +233,7 @@ Optional contract scripts (PowerShell, require the GenLayer CLI and a keystore):
 
 ```powershell
 npm run genlayer:lint     # lint the contract
-npm run deploy:asimov     # deploy to GenLayer Asimov
+npm run deploy:bradbury   # deploy to GenLayer Bradbury
 npm run genlayer:smoke    # submit a smoke-test trace
 ```
 
@@ -260,7 +260,7 @@ echotrace/
     README.md               # contract method reference
   scripts/                  # deploy / lint / smoke (PowerShell)
   deployments/
-    asimov.json             # deployed address + tx
+    bradbury.json           # deployed address + tx
   src/
     components/
       SignalField.tsx       # animated signal-network canvas background
@@ -283,10 +283,10 @@ echotrace/
 
 | | |
 | --- | --- |
-| Network | GenLayer Asimov Testnet |
-| Chain id | 61999 |
-| Contract | `0x169a52D470f92B925f062c39A17Ea5be81b3cbdA` |
-| Explorer | https://explorer-asimov.genlayer.com |
+| Network | GenLayer Bradbury Testnet |
+| Chain id | 4221 |
+| Contract | `0xB6016107Bf89382AB7B2B65B9AB0b4624478c5d8` |
+| Explorer | https://explorer-bradbury.genlayer.com |
 | Live app | https://echotrace-8ne.pages.dev/ |
 
 ## Disclaimer
