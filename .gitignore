@@ -9,3 +9,6 @@ deployments/
 !deployments/bradbury.json
 deployments/*-latest.txt
 package-lock.json
+_*.txt
+_*.out
+_*.mjs

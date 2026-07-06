@@ -72,6 +72,34 @@ export function hasContractAddress() {
   return ECHOTRACE_CONTRACT_ADDRESS !== ZERO_ADDRESS;
 }
 
+// GenLayer Asimov and Bradbury share the SAME chain id (4221). If a wallet
+// already has an "Asimov" network saved on 4221, MetaMask keeps routing to the
+// Asimov RPC and ignores our add/switch to Bradbury, so the gen RPC submit
+// fails with a Go json id-unmarshal error. Detect that case and tell the user
+// exactly how to fix it on their side.
+export function describeSubmitError(err: unknown): string {
+  const msg = String((err as { message?: string })?.message || err || "");
+  if (
+    /unmarshal string into Go struct field Request\.id|Parse error as single request|RPC submit/i.test(
+      msg,
+    )
+  ) {
+    return (
+      "Your wallet is routing to the wrong GenLayer RPC. Asimov and Bradbury share chain id 4221, " +
+      "so an old Asimov network in your wallet is intercepting the request. In MetaMask, open " +
+      "Settings > Networks, and either delete the GenLayer Asimov network or set the RPC URL of the " +
+      "4221 network to https://rpc-bradbury.genlayer.com, then reconnect and try again."
+    );
+  }
+  if (/reverted|consensus contract/i.test(msg)) {
+    return (
+      "Bradbury rejected the transaction at the consensus contract. The network is congested right now, " +
+      "please wait a moment and try again."
+    );
+  }
+  return msg || "The transaction could not be completed.";
+}
+
 export async function connectWallet(): Promise<`0x${string}`> {
   const provider = window.ethereum;
   if (!provider) {

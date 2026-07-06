@@ -9,6 +9,7 @@ import { SignalMap } from "./components/SignalMap";
 import {
   analyzeWithGenLayer,
   connectWallet,
+  describeSubmitError,
   ECHOTRACE_CONTRACT_ADDRESS,
   GENLAYER_EXPLORER,
   hasContractAddress,
@@ -114,9 +115,7 @@ export default function App() {
       setStage("done");
       setPhase("result");
     } catch (error) {
-      setWalletError(
-        error instanceof Error ? error.message : "The transaction could not be completed.",
-      );
+      setWalletError(describeSubmitError(error));
       setPhase("error");
     }
   };
