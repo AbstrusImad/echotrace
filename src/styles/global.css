@@ -663,6 +663,34 @@ a {
   background: linear-gradient(90deg, var(--cyan), var(--violet));
 }
 
+/* Skeleton loading state for the timeline while consensus runs: pulsing
+   placeholder chips and a scanning meter, no fabricated labels or numbers. */
+.timeline-skeleton {
+  border-color: rgba(255, 255, 255, 0.06);
+}
+
+.skeleton-chip {
+  width: 46px;
+  height: 12px;
+  border-radius: 99px;
+  background: rgba(0, 217, 255, 0.22);
+}
+
+.skeleton-bar {
+  width: 62%;
+  height: 15px;
+  border-radius: 6px;
+  background: rgba(255, 255, 255, 0.14);
+}
+
+.timeline-meter-scan {
+  display: block;
+  width: 45%;
+  height: 100%;
+  border-radius: inherit;
+  background: linear-gradient(90deg, transparent, var(--cyan), var(--violet), transparent);
+}
+
 .signal-particles {
   position: fixed;
   inset: 0;

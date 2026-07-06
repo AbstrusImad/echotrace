@@ -236,7 +236,7 @@ export default function App() {
               )}
             </div>
 
-            <PropagationTimeline result={result} />
+            <PropagationTimeline phase={phase} result={result} />
           </motion.section>
         )}
 
