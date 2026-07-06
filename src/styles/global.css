@@ -535,14 +535,19 @@ button {
 
 .trace-grid {
   display: grid;
-  grid-template-columns: 1.05fr 0.95fr;
-  gap: 22px;
+  grid-template-columns: 260px minmax(0, 1fr) 400px;
+  gap: 18px;
   align-items: stretch;
 }
 
+.trace-timeline-col,
 .trace-map-col,
 .trace-side-col {
   min-width: 0;
+}
+
+.app-main:has(.trace-stage) {
+  max-width: 1440px;
 }
 
 /* ---------- signal map (radar) ---------- */
@@ -1000,7 +1005,10 @@ button {
   backdrop-filter: blur(16px);
   -webkit-backdrop-filter: blur(16px);
   box-shadow: var(--shadow);
-  padding: 22px 24px;
+  padding: 22px 22px 24px;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
 }
 
 .timeline-title {
@@ -1010,43 +1018,56 @@ button {
   letter-spacing: 0.14em;
   color: var(--faint);
   font-weight: 700;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
 .timeline-track {
-  display: grid;
-  grid-template-columns: repeat(3, 1fr);
-  gap: 16px;
   position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  flex: 1;
+  padding-left: 22px;
 }
 
+/* vertical connector rail */
 .timeline-track::before {
   content: "";
   position: absolute;
-  top: 7px;
-  left: 8%;
-  right: 8%;
-  height: 2px;
-  background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  top: 8px;
+  bottom: 8px;
+  left: 6px;
+  width: 2px;
+  background: linear-gradient(180deg, var(--cyan), var(--violet), transparent);
+  opacity: 0.5;
 }
 
 .timeline-card {
   position: relative;
   display: flex;
-  flex-direction: column;
-  gap: 8px;
-  padding: 22px 16px 16px;
+  align-items: stretch;
+  gap: 12px;
+  padding: 14px 15px;
   border-radius: var(--radius-sm);
   border: 1px solid var(--border);
   background: rgba(255, 255, 255, 0.02);
 }
 
+.timeline-card-body {
+  display: flex;
+  flex-direction: column;
+  gap: 7px;
+  flex: 1;
+  min-width: 0;
+}
+
 .timeline-node {
   position: absolute;
-  top: -6px;
-  left: 20px;
-  width: 14px;
-  height: 14px;
+  top: 50%;
+  left: -22px;
+  transform: translateY(-50%);
+  width: 13px;
+  height: 13px;
   border-radius: 50%;
   background: var(--bg-2);
   border: 2px solid var(--cyan);
@@ -1186,9 +1207,44 @@ button {
 }
 
 /* ---------- responsive ---------- */
+@media (max-width: 1180px) {
+  .trace-grid {
+    grid-template-columns: minmax(0, 1fr) 380px;
+  }
+  .trace-timeline-col {
+    grid-column: 1 / -1;
+    order: 3;
+  }
+  .timeline-track {
+    flex-direction: row;
+    padding-left: 0;
+    padding-top: 22px;
+  }
+  .timeline-track::before {
+    top: 6px;
+    bottom: auto;
+    left: 8%;
+    right: 8%;
+    width: auto;
+    height: 2px;
+    background: linear-gradient(90deg, transparent, var(--border-strong), transparent);
+  }
+  .timeline-card {
+    flex: 1;
+  }
+  .timeline-node {
+    top: -22px;
+    left: 20px;
+    transform: none;
+  }
+}
+
 @media (max-width: 900px) {
   .trace-grid {
     grid-template-columns: 1fr;
+  }
+  .trace-timeline-col {
+    order: 0;
   }
   .radar-readouts {
     grid-template-columns: repeat(5, 1fr);
@@ -1210,10 +1266,23 @@ button {
     grid-template-columns: 1fr;
   }
   .timeline-track {
-    grid-template-columns: 1fr;
+    flex-direction: column;
+    padding-left: 22px;
+    padding-top: 0;
   }
   .timeline-track::before {
-    display: none;
+    top: 8px;
+    bottom: 8px;
+    left: 6px;
+    right: auto;
+    width: 2px;
+    height: auto;
+    background: linear-gradient(180deg, var(--cyan), var(--violet), transparent);
+  }
+  .timeline-node {
+    top: 50%;
+    left: -22px;
+    transform: translateY(-50%);
   }
   .app-footer {
     flex-direction: column;

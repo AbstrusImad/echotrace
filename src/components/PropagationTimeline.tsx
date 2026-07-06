@@ -35,27 +35,29 @@ function SkeletonTimeline() {
           <motion.div
             key={i}
             className="timeline-card timeline-skeleton"
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.12 * i }}
           >
             <span className="timeline-node" />
-            <motion.span
-              className="skeleton-chip"
-              animate={{ opacity: [0.3, 0.7, 0.3] }}
-              transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.15 }}
-            />
-            <motion.span
-              className="skeleton-bar"
-              animate={{ opacity: [0.3, 0.7, 0.3] }}
-              transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 + i * 0.15 }}
-            />
-            <div className="timeline-meter">
-              <motion.i
-                className="timeline-meter-scan"
-                animate={{ x: ["-100%", "220%"] }}
-                transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
+            <div className="timeline-card-body">
+              <motion.span
+                className="skeleton-chip"
+                animate={{ opacity: [0.3, 0.7, 0.3] }}
+                transition={{ duration: 1.2, repeat: Infinity, delay: i * 0.15 }}
               />
+              <motion.span
+                className="skeleton-bar"
+                animate={{ opacity: [0.3, 0.7, 0.3] }}
+                transition={{ duration: 1.2, repeat: Infinity, delay: 0.2 + i * 0.15 }}
+              />
+              <div className="timeline-meter">
+                <motion.i
+                  className="timeline-meter-scan"
+                  animate={{ x: ["-100%", "260%"] }}
+                  transition={{ duration: 1.5, repeat: Infinity, ease: "easeInOut", delay: i * 0.15 }}
+                />
+              </div>
             </div>
           </motion.div>
         ))}
@@ -77,14 +79,16 @@ export function PropagationTimeline({ phase, result }: PropagationTimelineProps)
           <motion.div
             key={`${event.label}-${event.time}`}
             className={`timeline-card timeline-${event.type}`}
-            initial={{ opacity: 0, y: 16 }}
-            animate={{ opacity: 1, y: 0 }}
+            initial={{ opacity: 0, x: -12 }}
+            animate={{ opacity: 1, x: 0 }}
             transition={{ delay: 0.12 * index }}
           >
             <span className="timeline-node" />
-            <span className="timeline-time">{event.time}</span>
-            <strong className="timeline-label">{event.label}</strong>
-            <IntensityBar value={event.intensity} delay={0.2 + index * 0.1} />
+            <div className="timeline-card-body">
+              <span className="timeline-time">{event.time}</span>
+              <strong className="timeline-label">{event.label}</strong>
+              <IntensityBar value={event.intensity} delay={0.2 + index * 0.1} />
+            </div>
           </motion.div>
         ))}
       </div>

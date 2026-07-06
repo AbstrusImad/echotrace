@@ -214,6 +214,9 @@ export default function App() {
               </div>
 
               <div className="trace-grid">
+                <div className="trace-timeline-col">
+                  <PropagationTimeline phase={phase} result={result} />
+                </div>
                 <div className="trace-map-col">
                   <SignalMap phase={phase} result={result} />
                 </div>
@@ -234,8 +237,6 @@ export default function App() {
                   )}
                 </div>
               </div>
-
-              <PropagationTimeline phase={phase} result={result} />
             </motion.section>
           )}
 
