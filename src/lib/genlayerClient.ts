@@ -134,10 +134,14 @@ export async function analyzeWithGenLayer(
   options.onProgress?.("switching-network");
   await ensureBradburyNetwork();
 
+  // Match the working GenLayer dApp pattern: create the wallet client with just
+  // { chain, account }. genlayer-js delegates signing to the injected wallet and
+  // handles all RPC polling through its OWN transport (integer JSON-RPC ids).
+  // Passing `provider` here routed extra RPC calls through MetaMask, whose
+  // string ids the GenLayer RPC rejects ("cannot unmarshal string into ... id").
   const writeClient = createClient({
     chain: testnetBradbury,
     account: options.walletAddress,
-    provider,
   });
 
   options.onProgress?.("awaiting-signature");
@@ -152,8 +156,8 @@ export async function analyzeWithGenLayer(
   const receipt = await readClient.waitForTransactionReceipt({
     hash: txHash,
     status: TransactionStatus.ACCEPTED,
-    interval: 3000,
-    retries: 90,
+    interval: 5000,
+    retries: 60,
   });
 
   if (receipt.txExecutionResultName !== ExecutionResult.FINISHED_WITH_RETURN) {
