@@ -1,10 +1,75 @@
-import { motion } from "framer-motion";
+import { animate, motion, useMotionValue, useTransform } from "framer-motion";
+import { useEffect } from "react";
 import type { AnalysisResult, AnalysisVerdict } from "../types/analysis";
 
 type SignalMapProps = {
   phase: "analyzing" | "result";
   result?: AnalysisResult | null;
 };
+
+// A metric label that shows an animated scanning placeholder while consensus is
+// still running, then counts up to the real on-chain value once it arrives.
+// There are no hardcoded fallback numbers: before a verdict exists the value is
+// null and only the scanning animation is shown.
+function MetricLabel({
+  className,
+  name,
+  value,
+  color,
+}: {
+  className: string;
+  name: string;
+  value: number | null;
+  color: string;
+}) {
+  const mv = useMotionValue(0);
+  const rounded = useTransform(mv, (v) => `${Math.round(v)}%`);
+
+  useEffect(() => {
+    if (value == null) return;
+    const controls = animate(mv, value, { duration: 1.1, ease: [0.2, 0.8, 0.2, 1] });
+    return controls.stop;
+  }, [value, mv]);
+
+  const ready = value != null;
+
+  return (
+    <motion.div
+      className={`floating-label ${className} ${ready ? "label-ready" : "label-scanning"}`}
+      initial={{ opacity: 0, y: 6 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
+      <span className="label-name">{name}</span>
+      {ready ? (
+        <motion.span
+          className="label-value"
+          style={{ color }}
+          initial={{ opacity: 0, scale: 0.8 }}
+          animate={{ opacity: 1, scale: 1 }}
+          transition={{ duration: 0.4 }}
+        >
+          <motion.span>{rounded}</motion.span>
+        </motion.span>
+      ) : (
+        <span className="label-scan" aria-label="scanning" style={{ color }}>
+          <motion.i
+            animate={{ opacity: [0.25, 1, 0.25] }}
+            transition={{ duration: 1, repeat: Infinity, delay: 0 }}
+          />
+          <motion.i
+            animate={{ opacity: [0.25, 1, 0.25] }}
+            transition={{ duration: 1, repeat: Infinity, delay: 0.2 }}
+          />
+          <motion.i
+            animate={{ opacity: [0.25, 1, 0.25] }}
+            transition={{ duration: 1, repeat: Infinity, delay: 0.4 }}
+          />
+        </span>
+      )}
+    </motion.div>
+  );
+}
 
 const nodes = [
   { id: "a", x: 50, y: 50, r: 8, delay: 0 },
@@ -40,8 +105,9 @@ const palette: Record<AnalysisVerdict | "Analyzing", string[]> = {
 export function SignalMap({ phase, result }: SignalMapProps) {
   const verdict = result?.verdict ?? "Analyzing";
   const colors = palette[verdict];
-  const coordination = result?.signals.coordinationIndex ?? 64;
-  const phraseSimilarity = result?.signals.phraseSimilarity ?? 58;
+  // No hardcoded values: these are null until the on-chain verdict arrives.
+  const coordination = result ? result.signals.coordinationIndex : null;
+  const phraseSimilarity = result ? result.signals.phraseSimilarity : null;
 
   return (
     <motion.div
@@ -160,12 +226,18 @@ export function SignalMap({ phase, result }: SignalMapProps) {
       </svg>
 
       <div className="floating-label label-origin">Signal Origin</div>
-      <div className="floating-label label-echo">
-        Echo similarity {phraseSimilarity}%
-      </div>
-      <div className="floating-label label-sync">
-        Coordination {coordination}%
-      </div>
+      <MetricLabel
+        className="label-echo"
+        name="Echo similarity"
+        value={phraseSimilarity}
+        color={colors[0]}
+      />
+      <MetricLabel
+        className="label-sync"
+        name="Coordination"
+        value={coordination}
+        color={colors[1]}
+      />
       <div className="map-caption">
         {phase === "analyzing"
           ? "GenLayer is tracing the signal..."

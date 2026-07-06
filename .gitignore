@@ -8,3 +8,4 @@ deployments/
 !deployments/
 !deployments/asimov.json
 deployments/*-latest.txt
+package-lock.json

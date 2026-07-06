@@ -535,6 +535,50 @@ a {
   backdrop-filter: blur(14px);
 }
 
+.floating-label.label-echo,
+.floating-label.label-sync {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.label-name {
+  color: #cfe4f5;
+  opacity: 0.9;
+}
+
+.label-value {
+  font-variant-numeric: tabular-nums;
+  min-width: 34px;
+  text-align: right;
+}
+
+.label-ready {
+  box-shadow: 0 0 34px rgba(0, 217, 255, 0.22);
+}
+
+/* Scanning placeholder: three pulsing dots shown while consensus runs, so no
+   number is displayed until the real on-chain value arrives. */
+.label-scan {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  min-width: 34px;
+}
+
+.label-scan i {
+  width: 5px;
+  height: 5px;
+  border-radius: 50%;
+  background: currentColor;
+  display: inline-block;
+}
+
+.label-scanning {
+  border-style: dashed;
+  border-color: rgba(255, 255, 255, 0.18);
+}
+
 .label-origin {
   top: 47%;
   left: 45%;
