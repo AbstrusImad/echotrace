@@ -1,0 +1,29 @@
+{
+  "name": "echotrace",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 127.0.0.1",
+    "build": "tsc --noEmit && vite build",
+    "preview": "vite preview --host 127.0.0.1",
+    "genlayer:lint": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/lint-contract.ps1",
+    "deploy:asimov": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/deploy-asimov.ps1",
+    "genlayer:smoke": "powershell.exe -NoProfile -ExecutionPolicy Bypass -File ./scripts/smoke-submit.ps1"
+  },
+  "dependencies": {
+    "framer-motion": "^12.23.0",
+    "genlayer-js": "^1.1.8",
+    "react": "^19.1.0",
+    "react-dom": "^19.1.0"
+  },
+  "devDependencies": {
+    "@types/node": "^24.0.0",
+    "@types/react": "^19.1.0",
+    "@types/react-dom": "^19.1.0",
+    "@vitejs/plugin-react": "^5.0.0",
+    "typescript": "^5.8.3",
+    "vite": "^7.0.0"
+  },
+  "packageManager": "pnpm@9.15.5+sha512.845196026aab1cc3f098a0474b64dfbab2afe7a1b4e91dd86895d8e4aa32a7a6d03049e2d0ad770bbe4de023a7122fb68c1a1d6e0d033c7076085f9d5d4800d4"
+}

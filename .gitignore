@@ -1,0 +1,10 @@
+node_modules/
+dist/
+.env
+vite-server*.log
+_*.mjs
+_*.out
+deployments/
+!deployments/
+!deployments/asimov.json
+deployments/*-latest.txt
